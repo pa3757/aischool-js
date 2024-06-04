@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            do-while
+            - 1회 동작 후 조건식 확인
+        */
+       let num = 1;
+       do{
+        console.log('num', num)
+        num++
+       }while(num<11);
+
+       // 1~100 숫자 중, 입력한 숫자의 배수만 출력
+       // ex ) 배수 입력 : 5
+       // console -> 5,10,15
+
+       // 1-2) 1~100까지의 숫자 중, 사용자가 입력한 숫자의 배수의 합을 출력
+       // do-while 사용
+       let by = 1;
+       let num2 = parseInt(prompt("배수 입력")) 
+       let num3 = 0;
+       let addnum = 0;
+       do{
+            console.log(num3)
+            num3 = num2 * by++
+            if(num3<100){addnum += num3}
+       }while(num3<100)
+       console.log("배수의 합 : ", addnum)
+    </script>
+</body>
+</html>
