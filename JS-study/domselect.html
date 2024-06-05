@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form
+      name="frm"
+      method="post"
+      action="#"
+      target="_blank"
+      onsubmit="return false"
+    >
+      <select name="major" onchange="sel_change()">
+        <option>HTML</option>
+        <option>CSS</option>
+        <option>JS</option>
+      </select>
+      <input type="submit" value="전송" onclick="send()" />
+    </form>
+
+    <p id="space"></p>
+
+    <script>
+      let getText = "";
+      // form 제출전 다른 함수 실행시켜주고 싶을 때 onsubmit="return false"
+      // select 내의 모든 option요소 접근
+      // select이름.options
+      // 선택된 option요소의 index값 가져오기 : selectedIndex
+      let options = document.frm.major.options;
+      console.log(options[1].value);
+      const sel_change = () => {
+        let sel_idx = document.frm.major.selectedIndex;
+        console.log(options[sel_idx].value);
+        getText = options[sel_idx].value;
+      };
+      const send = () => {
+        let space = document.getElementById("space");
+        space.innerHTML += `가장 좋아하는 과목은 ${getText} 입니다<br/>`;
+      };
+    </script>
+  </body>
+</html>

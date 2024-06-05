@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form name="frm" method="post" action="#" target="_blank">
+      이름 <input type="text" name="name" />
+      <br />
+      나이 <input type="text" name="age" />
+      <br />
+      직업 <input type="text" name="job" />
+      <br />
+      PW <input type="password" name="pw" />
+      <br />
+      <input type="submit" name="frm_submit" value="전송" />
+    </form>
+    <script>
+      console.log(document.frm);
+      console.log(document.frm.name);
+      console.log(document.frm.method);
+      console.log(document.frm.length);
+      // 자식요소 접근
+      console.log(document.frm.elements);
+    </script>
+  </body>
+</html>
