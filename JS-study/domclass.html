@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .bg {
+        border: 10px solid greenyellow;
+      }
+      .test {
+        border: 10px solid skyblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content" class="box test">JavaScript ClassList</div>
+    <button id="btn" onclick="switchMode()">Dark Mode</button>
+    <script>
+      let content = document.getElementById("content");
+
+      // class 속성 모든 값 가져오기 : 요소.classList.add("추가할내용")
+      content.classList.add("bg");
+      console.log(content.classList);
+
+      // class 속성 삭제
+      content.classList.remove("bg");
+
+      // 속성 값 존재 확인
+      let check = content.classList.contains("test");
+
+      const switchMode = () => {
+        let isDark = content.classList.toggle("isDark");
+        let btn = document.getElementById("btn");
+        btn.innerHTML = isDark ? "Light Mode" : "Dark Mode";
+
+        const styled = {
+          backgroundColor: isDark ? "black" : "white",
+          color: isDark ? "white" : "black",
+        };
+
+        content.style.backgroundColor = styled.backgroundColor;
+        content.style.color = styled.color;
+      };
+    </script>
+  </body>
+</html>

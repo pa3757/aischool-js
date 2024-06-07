@@ -6,11 +6,28 @@
     <title>Document</title>
   </head>
   <body>
-    <form name="frm" method="post" action="#" target="_blank">
-      <input type="text" name="name" />
-      <input type="submit" value="출력" />
+    <form
+      name="frm"
+      method="post"
+      action="#"
+      target="_blank"
+      onsubmit="return false"
+    >
+      <input type="text" name="name" onchange="sel_change()" />
+      <input type="submit" value="출력" onclick="send()" />
     </form>
 
     <div id="space"></div>
+    <script>
+      let name = "";
+      const sel_change = () => {
+        name = document.frm.name.value;
+        document.frm.name.value = "";
+      };
+      const send = () => {
+        let space = document.getElementById("space");
+        space.innerHTML += `${name}<br/>`;
+      };
+    </script>
   </body>
 </html>
