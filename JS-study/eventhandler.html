@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="h1tag">점심</h1>
+    <button onclick="popUp()">인라인</button>
+    <button id="btn_han">핸들러</button>
+    <button id="btn_lis">리스너</button>
+
+    <script>
+      const popUp = () => {
+        alert("점메추");
+      };
+      // eventhandler : 함수
+      const btn = document.getElementById("btn_han");
+      btn.onclick = () => {
+        alert("점메추2");
+      };
+
+      // eventlistener : 요소접근 -> 함수 ->이벤트 정의
+
+      const clickBtn = () => {
+        alert("점메추3");
+      };
+
+      const btn2 = document.getElementById("btn_lis");
+      btn2.addEventListener("click", clickBtn);
+
+      // 함수 직접작성 - 익명함수
+      btn2.addEventListener("click", () => {
+        alert("점메추4");
+      });
+    </script>
+  </body>
+</html>

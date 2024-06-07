@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span id="h1tag" style="font-size: 30px">마우스를 올려주세요!</span>
+    <br />
+    <button id="btn">클릭</button>
+    <input type="text" id="inputTxt" />
+    <p id="container"></p>
+
+    <input type="number" id="num1" />
+    <br />
+    <input type="number" id="num2" />
+    <br />
+    <button id="result">연산결과</button>
+    <p id="result2"></p>
+
+    <script>
+      const num1 = document.getElementById("num1");
+      const num2 = document.getElementById("num2");
+      const result = document.getElementById("result");
+      const result2 = document.getElementById("result2");
+
+      result.addEventListener("click", () => {
+        const sum = parseInt(num1.value) + parseInt(num2.value);
+        result2.innerHTML = `연산결과 : ${sum}`;
+      });
+
+      // 1. id가 btn인 버튼을 클릭 시, "클릭 이벤트 발생"이라는 팝업창을 띄워줌
+      // - 조건 : 리스너 이벤트
+      const btn = document.getElementById("btn");
+      btn.addEventListener("click", () => {
+        alert("클릭 이벤트 발생");
+      });
+
+      // 2. id가 h1tag인 h1 위에 커서올릴 때 "마우스hover" 팝업
+      const h1tag = document.getElementById("h1tag");
+
+      const mouseOver = () => {
+        h1tag.style.color = "red";
+      };
+      const mouseOut = () => {
+        h1tag.style.color = "black";
+      };
+      h1tag.addEventListener("mouseover", mouseOver);
+      h1tag.addEventListener("mouseout", mouseOut);
+
+      // inputTxt 가져와서 변수저장
+      const inputTxt = document.getElementById("inputTxt");
+
+      // inputTxt 변경 될 때 inputTxt 값을 console에 확인하고 가져온 값을 container에 띄우기
+      inputTxt.addEventListener("input", () => {
+        console.log(inputTxt.value);
+        const p = document.getElementById("container");
+        p.innerText = inputTxt.value;
+      });
+    </script>
+  </body>
+</html>

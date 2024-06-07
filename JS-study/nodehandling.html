@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="ul">
+      <li>HTML</li>
+    </ul>
+    <script>
+      // 노드 : DOM객체에서 다루는 가장 작은 단위
+      const ul = document.getElementById("ul");
+      // li 생성
+      const li = document.createElement("li");
+      // 값넣기
+      //   const text = document.createTextNode("CSS");
+      //   li.appendChild(text);
+      li.innerHTML = "CSS";
+      // 부모에게 연결
+      ul.appendChild(li);
+      const img = document.createElement("img");
+      img.src = "https://smhrd-melodymap.com/image/Main.jpg";
+      console.log(img);
+      ul.appendChild(img);
+      // img -> createAttribute
+      // 생성 -> 텍스트삽입 -> append
+    </script>
+  </body>
+</html>

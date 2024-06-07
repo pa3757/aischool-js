@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="#">
+      <input type="text" id="text1" />
+      <input type="submit" id="submit" />
+    </form>
+    <script>
+      const submit = document.getElementById("submit");
+      submit.addEventListener("click", (e) => {
+        let data = document.getElementById("text1").value;
+        if (data == 1) {
+          e.preventDefault();
+          console.log("제출방지");
+        }
+      });
+    </script>
+  </body>
+</html>

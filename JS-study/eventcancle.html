@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 기본 기능 요소 (a, submit, 우클릭) 취소
+      // event.preventDefault()
+      // 1. 우클릭 방지
+      window.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        alert("우클릭 방지");
+      });
+    </script>
+  </body>
+</html>

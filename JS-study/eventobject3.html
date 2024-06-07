@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>누른 키 확인</h1>
+    <p>누른 키 코드 : <span id="span1"></span></p>
+    <p>누른 키 : <span id="span2"></span></p>
+    <script>
+      const span1 = document.getElementById("span1");
+      const span2 = document.getElementById("span2");
+
+      window.addEventListener("keydown", (e) => {
+        span1.innerHTML = e.keyCode;
+        span2.innerHTML = e.key;
+      });
+    </script>
+  </body>
+</html>
