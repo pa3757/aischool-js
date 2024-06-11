@@ -47,6 +47,11 @@ const readUserData = () => {
     .then((res) => {
       const data = res.val();
       console.log(data);
+      const nowUser = document.getElementById("nowUser");
+      nowUser.innerHTML = "";
+      for (let key in data) {
+        nowUser.innerHTML += `<li>${data[key].name}</li>`;
+      }
     });
 };
 
