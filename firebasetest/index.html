@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+  </head>
+  <body>
+    <h1>hello world</h1>
+    <form name="frm" onsubmit="return false">
+      id : <input type="text" name="id" /><br />
+      email : <input type="email" name="email" /><br />
+      name : <input type="name" name="userName" /><br />
+      <button id="addUserBtn">유저등록</button>
+    </form>
+    <hr />
+    <button id="getUserBtn">유저가져오기</button>
+    <h1>유저현황</h1>
+    <p id="nowUser"></p>
+    <script src="firebase.js"></script>
+  </body>
+</html>
