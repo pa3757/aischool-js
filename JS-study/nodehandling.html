@@ -20,12 +20,21 @@
       li.innerHTML = "CSS";
       // 부모에게 연결
       ul.appendChild(li);
-      const img = document.createElement("img");
-      img.src = "https://smhrd-melodymap.com/image/Main.jpg";
-      console.log(img);
-      ul.appendChild(img);
+      //   const img = document.createElement("img");
+      //   img.src = "https://smhrd-melodymap.com/image/Main.jpg";
+      //   console.log(img);
+      //   ul.appendChild(img);
       // img -> createAttribute
       // 생성 -> 텍스트삽입 -> append
+
+      // 배열, 반복문을 통해서 node 생성
+      let textList = ["임지후", "손준수", "김정현", "송가람"];
+      let liList = [];
+      for (let i = 0; i < textList.length; i++) {
+        liList[i] = document.createElement("li");
+        liList[i].innerHTML = textList[i];
+        ul.appendChild(liList[i]);
+      }
     </script>
   </body>
 </html>

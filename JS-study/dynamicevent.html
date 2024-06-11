@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  </head>
+  <body>
+    <button id="addBtn">버튼 추가하기</button>
+    <div id="container"></div>
+
+    <script>
+      // 1. addBtn 버튼 누를 때
+      // 2. container안에 새로운 버튼생성
+      // jquery => .html
+      $("#addBtn").click(() => {
+        $("#container").html(`<button id="newBtn">새로운버튼</button>`);
+      });
+      $(document).on("click", "#newBtn", () => {
+        alert("clear");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  </head>
+  <body>
+    <img
+      id="pic"
+      width="200px"
+      src="data:image/png;base64,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"
+    />
+    <p id="abc">여러분 안녕하세요~</p>
+    <input type="text" id="inputTxt" />
+    <button id="btn">내용 변경!</button>
+    <br />
+    <button id="style-btn">스타일 변경</button>
+    <button id="pic-btn">사진 변경</button>
+    <button id="this-btn">this 버튼</button>
+    <script>
+      //
+      // 1. 내가 원하는 HTML 요소를 JS로 가져오겠다.
+      // 요소 가져오기
+      let element = $("#abc");
+      // 2. 내가 가져온 요소 안에 내용만 확인하기
+      console.log(element.text());
+      // 3. 내가 원하는 요소 수정해보기(text)
+      element.text("하이용");
+      // 4. 내가 원하는 요소를 태그 포함해서 수정하기
+      element.html("<h1>태그포함 변경</h1>");
+      // 5. 버튼 누르기
+
+      $("#btn").click(() => {
+        let txt = $("#inputTxt").val();
+        element.html(`<h1>${txt}</h1>`);
+        $("#inputTxt").val("");
+      });
+      // 6. 스타일 변경하기
+      $("#style-btn").click(() => {
+        element.css({
+          color: "white",
+          backgroundColor: "skyblue",
+        });
+      });
+      // 7. 사진 변경하기
+      $("#pic-btn").click(() => {
+        $("#pic").attr(
+          "src",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTouwuqSAdnf_i3Myl8WjoIzG-sOa9Tkiukrg&s"
+        );
+      });
+      // this 문법 -> 애로우펑션 불가능
+      // 같은 요소 사용시 유지보수 용이
+      // python -> self
+      $("#this-btn").click(function () {
+        $(this).text("변경");
+      });
+    </script>
+  </body>
+</html>

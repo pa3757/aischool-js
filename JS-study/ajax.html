@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="./JS/ajax.js"></script>
+  </head>
+  <body>
+    <h1>박스오피스</h1>
+    <div id="container"></div>
+    <script>
+      let moviedata = "";
+      const Movie = () => {
+        $.ajax({
+          url: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json",
+          type: "GET",
+          data: {
+            key: "620f52ec235e3295a89b0339de1de449",
+            targetDt: "20240609",
+          },
+          success: (res) => {
+            console.log(res);
+            moviedata = res.boxOfficeResult.dailyBoxOfficeList;
+            console.log(moviedata);
+            let container = document.getElementById("container");
+            for (let i = 0; i < moviedata.length; i++) {
+              let p = document.createElement("p");
+              p.innerHTML = `${moviedata[i].rank} <br/> 영화제목 : ${moviedata[i].movieNm} <br/> 개봉일 : ${moviedata[i].openDt}`;
+              container.appendChild(p);
+            }
+          },
+          error: (error) => {
+            console.error("통신 실패", error);
+          },
+        });
+      };
+      Movie();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  </head>
+  <body>
+    <span id="num">0</span>
+    <br />
+    <button id="btn1">+</button>
+    <button id="btn2">-</button>
+    <script>
+      let num = $("#num");
+      $("#btn1").click(() => {
+        num.text(Number(num.text()) + 1);
+      });
+      $("#btn2").click(() => {
+        if (Number(num.text()) > 0) {
+          num.text(Number(num.text()) + -1);
+        }
+      });
+    </script>
+  </body>
+</html>

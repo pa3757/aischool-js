@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="ulTag">
+      <li>김치찜</li>
+      <li>간장계란밥</li>
+      <li>김치수제비</li>
+    </ul>
+    <script>
+      // 속성 노드 추가
+      const src =
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcnQhyqZ23_ubE_5aSkXq5IJQhGY5SpuJSsA&s";
+      // 1. DOM 요소에 속성을 생성
+      let ul = document.getElementById("ulTag");
+      // 2. 특정 요소노드에 속성을 삽입
+      // 3. 부모요소에 자식요소 삽입
+
+      // 속성 노드를 추가하는 사고의 흐름
+      // 1. li 1개를 추가로 제작
+      let li = document.createElement("li");
+      // 2. li에 넣어줄 이미지 태그 생성
+      let img = document.createElement("img");
+      // 3. img에 넣어줄 src 속성 생성
+      // const src2 = document.createAttribute("src")
+      img.src = src;
+      // 4. src에 내 사진 속성 추가
+      // src2.value = src
+      // 5. 속성 노드를 img태그에 삽입
+      // img.setAttribute(src2)
+      // 6. 완성된 img태그를 li의 자식으로 추가
+      li.appendChild(img);
+      // 7. 완성된 li태그를 ul에 추가
+      ul.appendChild(li);
+    </script>
+  </body>
+</html>
