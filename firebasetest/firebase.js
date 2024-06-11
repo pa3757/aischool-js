@@ -33,9 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let name = document.getElementsByName("userName")[0].value;
 
     console.log("ID:", id);
-
     console.log("Email:", email);
     console.log("Name:", name);
+    // 입력필드초기화
+    document.getElementsByName("id")[0].value = "";
+    document.getElementsByName("email")[0].value = "";
+    document.getElementsByName("userName")[0].value = "";
 
     writeUserData(id, email, name);
   });
