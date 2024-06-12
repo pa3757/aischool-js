@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Timer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="timer-container">
+      <h1>Set Your Timer</h1>
+      <label for="hourRange">Hours: <span id="hourValue">0</span></label>
+      <input
+        type="range"
+        id="hourRange"
+        min="0"
+        max="10"
+        value="0"
+        oninput="updateHourValue(this.value)"
+      />
+      <button id="startButton">Start Timer</button>
+      <div id="timerDisplay">00:00:00</div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

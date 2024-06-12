@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.birds.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="signup.html">Sign Up</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="post.html">Post</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="game.html">Game</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h1 style="color: white">Welcome to Our Website</h1>
+    </main>
+    <script>
+      VANTA.BIRDS({
+        el: "body",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 700.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        backgroundColor: 0x0,
+        color1: 0xffffff,
+      });
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
