@@ -1,5 +1,3 @@
-<script src="three.r134.min.js"></script>
-    <script src="vanta.birds.min.js"></script>
 document
   .getElementById("signupForm")
   ?.addEventListener("submit", function (event) {
