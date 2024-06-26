@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>jQuery 실습 문제 3</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <input type="text" id="itemInput" placeholder="항목 입력" />
+    <button id="addItem">추가</button>
+    <ul id="itemList"></ul>
+
+    <script>
+      document.getElementById("addItem").addEventListener("click", () => {
+        let item = document.getElementById("itemInput").value;
+        let li = document.createElement("li");
+        li.textContent = item;
+        document.getElementById("itemList").appendChild(li);
+      });
+    </script>
+  </body>
+</html>
