@@ -17,6 +17,7 @@ function App() {
         >
           Learn React
         </a>
+        지도
       </header>
     </div>
   );
