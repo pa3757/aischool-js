@@ -1,13 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-// import App from './App';
 import reportWebVitals from "./reportWebVitals";
-import App10 from "./App10";
-// import Addnum from './components/Addnum';
-// import App2 from './App2';
+import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App10 />);
+root.render(<App />);
 
 reportWebVitals();

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>핀볼 사다리타기 게임</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+      #startButton {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
+    <br />
+    <button id="startButton">시작</button>
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+      const startButton = document.getElementById("startButton");
+
+      // 게임 상태
+      let balls = [];
+      let pins = [];
+      let isGameRunning = false;
+      let winner = null;
+
+      // 공 생성
+      function createBalls() {
+        balls = [];
+        for (let i = 0; i < 5; i++) {
+          balls.push({
+            x: 50 + i * 75,
+            y: 50,
+            radius: 15,
+            speed: 2,
+            dx: 0,
+            dy: 2,
+            number: i + 1,
+          });
+        }
+      }
+
+      // 핀 생성
+      function createPins() {
+        pins = [];
+        for (let i = 0; i < 5; i++) {
+          for (let j = 0; j < 5; j++) {
+            pins.push({ x: 100 + j * 50, y: 150 + i * 75, radius: 5 });
+          }
+        }
+      }
+
+      function drawBalls() {
+        balls.forEach((ball) => {
+          ctx.beginPath();
+          ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+          ctx.fillStyle = "red";
+          ctx.fill();
+          ctx.closePath();
+
+          ctx.fillStyle = "white";
+          ctx.font = "12px Arial";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(ball.number, ball.x, ball.y);
+        });
+      }
+
+      function drawPins() {
+        pins.forEach((pin) => {
+          ctx.beginPath();
+          ctx.arc(pin.x, pin.y, pin.radius, 0, Math.PI * 2);
+          ctx.fillStyle = "blue";
+          ctx.fill();
+          ctx.closePath();
+        });
+      }
+
+      function drawFinishLine() {
+        ctx.beginPath();
+        ctx.moveTo(0, 550);
+        ctx.lineTo(400, 550);
+        ctx.strokeStyle = "green";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+
+      function update() {
+        if (!isGameRunning) return;
+
+        balls.forEach((ball) => {
+          ball.x += ball.dx;
+          ball.y += ball.dy;
+
+          // 벽 충돌 감지
+          if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+            ball.dx = -ball.dx;
+          }
+
+          // 핀 충돌 감지
+          pins.forEach((pin) => {
+            let dx = pin.x - ball.x;
+            let dy = pin.y - ball.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < ball.radius + pin.radius) {
+              ball.dx = -ball.dx + (Math.random() - 0.5) * 2;
+              ball.dy = Math.abs(ball.dy);
+            }
+          });
+
+          // 도착 지점 도달 시
+          if (ball.y + ball.radius > 550 && !winner) {
+            winner = ball.number;
+            isGameRunning = false;
+          }
+        });
+      }
+
+      function drawWinner() {
+        if (winner) {
+          ctx.fillStyle = "black";
+          ctx.font = "30px Arial";
+          ctx.textAlign = "center";
+          ctx.fillText(`Winner: 공 ${winner}`, canvas.width / 2, 30);
+        }
+      }
+
+      function gameLoop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawPins();
+        drawBalls();
+        drawFinishLine();
+        drawWinner();
+        update();
+        requestAnimationFrame(gameLoop);
+      }
+
+      startButton.addEventListener("click", () => {
+        if (!isGameRunning) {
+          isGameRunning = true;
+          winner = null;
+          createBalls();
+          createPins();
+        }
+      });
+
+      createPins();
+      gameLoop();
+    </script>
+  </body>
+</html>

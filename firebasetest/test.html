@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
   <head>
     <meta charset="UTF-8" />
-    <title>jQuery 실습 문제 3</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title></title>
   </head>
   <body>
-    <input type="text" id="itemInput" placeholder="항목 입력" />
-    <button id="addItem">추가</button>
-    <ul id="itemList"></ul>
+    <input type="text" id="text" />
+    <p id="container"></p>
 
     <script>
-      document.getElementById("addItem").addEventListener("click", () => {
-        let item = document.getElementById("itemInput").value;
-        let li = document.createElement("li");
-        li.textContent = item;
-        document.getElementById("itemList").appendChild(li);
+      const text = document.getElementById("text");
+      const container = document.getElementById("container");
+
+      text.addEventListener("input", (e) => {
+        container.innerText = e.target.value;
       });
     </script>
   </body>
