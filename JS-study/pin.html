@@ -5,60 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>핀볼 사다리타기 게임</title>
     <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
       canvas {
         border: 1px solid black;
+        margin-top: 20px;
       }
-      #startButton {
-        margin-top: 10px;
+      #controls {
+        margin-top: 20px;
+      }
+      #result {
+        margin-top: 20px;
+        font-size: 24px;
+        font-weight: bold;
       }
     </style>
   </head>
   <body>
+    <div id="controls">
+      <label for="ballCount">공의 개수:</label>
+      <input type="number" id="ballCount" min="1" max="10" value="5" />
+      <button id="startButton">시작</button>
+    </div>
     <canvas id="gameCanvas" width="400" height="600"></canvas>
-    <br />
-    <button id="startButton">시작</button>
+    <div id="result"></div>
     <script>
       const canvas = document.getElementById("gameCanvas");
       const ctx = canvas.getContext("2d");
       const startButton = document.getElementById("startButton");
+      const ballCountInput = document.getElementById("ballCount");
+      const resultDiv = document.getElementById("result");
 
-      // 게임 상태
       let balls = [];
       let pins = [];
+      let rotatingPins = [];
       let isGameRunning = false;
       let winner = null;
+      let gameStartTime;
+      const MAX_GAME_TIME = 10000; // 10초
 
-      // 공 생성
       function createBalls() {
+        const count = parseInt(ballCountInput.value);
         balls = [];
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < count; i++) {
           balls.push({
-            x: 50 + i * 75,
+            x: (canvas.width / (count + 1)) * (i + 1),
             y: 50,
             radius: 15,
             speed: 2,
             dx: 0,
             dy: 2,
             number: i + 1,
+            color: `hsl(${(360 / count) * i}, 100%, 50%)`,
+            collisions: 0,
           });
         }
       }
 
-      // 핀 생성
       function createPins() {
         pins = [];
-        for (let i = 0; i < 5; i++) {
-          for (let j = 0; j < 5; j++) {
-            pins.push({ x: 100 + j * 50, y: 150 + i * 75, radius: 5 });
+        for (let i = 0; i < 7; i++) {
+          for (let j = 0; j < 7; j++) {
+            pins.push({ x: 50 + j * 50, y: 150 + i * 60, radius: 5 });
           }
         }
+      }
+
+      function createRotatingPins() {
+        rotatingPins = [
+          { x: 50, y: 300, length: 60, angle: 0, speed: 0.05 },
+          { x: 200, y: 300, length: 60, angle: 0, speed: 0.05 },
+          { x: 350, y: 300, length: 60, angle: 0, speed: 0.05 },
+        ];
       }
 
       function drawBalls() {
         balls.forEach((ball) => {
           ctx.beginPath();
           ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-          ctx.fillStyle = "red";
+          ctx.fillStyle = ball.color;
           ctx.fill();
           ctx.closePath();
 
@@ -80,6 +109,21 @@
         });
       }
 
+      function drawRotatingPins() {
+        rotatingPins.forEach((pin) => {
+          ctx.save();
+          ctx.translate(pin.x, pin.y);
+          ctx.rotate(pin.angle);
+          ctx.beginPath();
+          ctx.moveTo(-pin.length / 2, 0);
+          ctx.lineTo(pin.length / 2, 0);
+          ctx.strokeStyle = "red";
+          ctx.lineWidth = 5;
+          ctx.stroke();
+          ctx.restore();
+        });
+      }
+
       function drawFinishLine() {
         ctx.beginPath();
         ctx.moveTo(0, 550);
@@ -92,16 +136,22 @@
       function update() {
         if (!isGameRunning) return;
 
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - gameStartTime;
+        const timeRatio = Math.min(elapsedTime / MAX_GAME_TIME, 1);
+
+        rotatingPins.forEach((pin) => {
+          pin.angle += pin.speed;
+        });
+
         balls.forEach((ball) => {
           ball.x += ball.dx;
           ball.y += ball.dy;
 
-          // 벽 충돌 감지
           if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
             ball.dx = -ball.dx;
           }
 
-          // 핀 충돌 감지
           pins.forEach((pin) => {
             let dx = pin.x - ball.x;
             let dy = pin.y - ball.y;
@@ -110,32 +160,97 @@
             if (distance < ball.radius + pin.radius) {
               ball.dx = -ball.dx + (Math.random() - 0.5) * 2;
               ball.dy = Math.abs(ball.dy);
+              ball.collisions++;
+
+              let speedReduction = 0.98 - ball.collisions * 0.005;
+              speedReduction = Math.max(speedReduction, 0.8);
+              ball.speed *= speedReduction;
+              ball.dx *= speedReduction;
+              ball.dy *= speedReduction;
             }
           });
 
-          // 도착 지점 도달 시
+          rotatingPins.forEach((pin) => {
+            let dx = ball.x - pin.x;
+            let dy = ball.y - pin.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < ball.radius + pin.length / 2) {
+              let pinEndX = pin.x + Math.cos(pin.angle) * (pin.length / 2);
+              let pinEndY = pin.y + Math.sin(pin.angle) * (pin.length / 2);
+              let pinStartX = pin.x - Math.cos(pin.angle) * (pin.length / 2);
+              let pinStartY = pin.y - Math.sin(pin.angle) * (pin.length / 2);
+
+              let closestX = Math.max(pinStartX, Math.min(ball.x, pinEndX));
+              let closestY = Math.max(pinStartY, Math.min(ball.y, pinEndY));
+
+              let distanceX = ball.x - closestX;
+              let distanceY = ball.y - closestY;
+              let distanceSquared =
+                distanceX * distanceX + distanceY * distanceY;
+
+              if (distanceSquared <= ball.radius * ball.radius) {
+                let normalX = distanceX / Math.sqrt(distanceSquared);
+                let normalY = distanceY / Math.sqrt(distanceSquared);
+
+                let dotProduct = ball.dx * normalX + ball.dy * normalY;
+
+                ball.dx = ball.dx - 2 * dotProduct * normalX;
+                ball.dy = ball.dy - 2 * dotProduct * normalY;
+
+                ball.collisions++;
+                let speedReduction = 0.98 - ball.collisions * 0.005;
+                speedReduction = Math.max(speedReduction, 0.8);
+                ball.speed *= speedReduction;
+                ball.dx *= speedReduction;
+                ball.dy *= speedReduction;
+              }
+            }
+          });
+
+          const minSpeed = 1;
+          const maxSpeed = 5;
+          ball.speed = minSpeed + (maxSpeed - minSpeed) * (1 - timeRatio);
+          ball.dy = Math.max(ball.speed, minSpeed);
+
           if (ball.y + ball.radius > 550 && !winner) {
             winner = ball.number;
             isGameRunning = false;
+            showResult(winner);
           }
         });
+
+        if (elapsedTime >= MAX_GAME_TIME && !winner) {
+          winner = balls.reduce((prev, current) =>
+            prev.y > current.y ? prev : current
+          ).number;
+          isGameRunning = false;
+          showResult(winner);
+        }
       }
 
-      function drawWinner() {
-        if (winner) {
-          ctx.fillStyle = "black";
-          ctx.font = "30px Arial";
-          ctx.textAlign = "center";
-          ctx.fillText(`Winner: 공 ${winner}`, canvas.width / 2, 30);
-        }
+      function showResult(winnerNumber) {
+        const winnerBall = balls.find((ball) => ball.number === winnerNumber);
+        resultDiv.style.color = winnerBall.color;
+        resultDiv.textContent = `Winner: 공 ${winnerNumber}`;
+
+        let degree = 0;
+        const interval = setInterval(() => {
+          degree += 10;
+          resultDiv.style.transform = `rotate(${degree}deg)`;
+          if (degree >= 360) {
+            clearInterval(interval);
+            resultDiv.style.transform = "rotate(0deg)";
+          }
+        }, 20);
       }
 
       function gameLoop() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawPins();
+        drawRotatingPins();
         drawBalls();
         drawFinishLine();
-        drawWinner();
         update();
         requestAnimationFrame(gameLoop);
       }
@@ -144,12 +259,16 @@
         if (!isGameRunning) {
           isGameRunning = true;
           winner = null;
+          resultDiv.textContent = "";
           createBalls();
           createPins();
+          createRotatingPins();
+          gameStartTime = Date.now();
         }
       });
 
       createPins();
+      createRotatingPins();
       gameLoop();
     </script>
   </body>
