@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        프론트에서 백엔드 서버에게 숫자 2개 전달
+        백엔드에서는 두 수의 합을 구하기
+    -->
+    <form action="http://192.168.21.143:3000" method="get">
+      <span>숫자1</span><input type="text" name="num1" /> <br /><span
+        >숫자2</span
+      ><input type="text" name="num2" />
+      <br />
+      <select name="cal" id="cal">
+        <option value="+">더하기</option>
+        <option value="-">빼기</option>
+        <option value="*">곱하기</option>
+        <option value="/">나누기</option>
+      </select>
+      <input type="submit" value="계산" />
+    </form>
+  </body>
+</html>

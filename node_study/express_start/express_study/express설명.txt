@@ -1,0 +1,15 @@
+express framework
+- 이전까지 진행했던 기본적인 Node 코드는 서버 하나가 모든 업무를 담당(생성, 요청, 응답 ..)
+- 사용자 증가 -> 작업 증가 -> 파일수 증가
+- 분업화 진행
+1) config : 설정 정보(DB, API key 등)
+2) public : 정적인 파일들을 관리하는 공간(css,js,img,video ..)
+3) routes : 경로를 담당하는 공간(이정표)
+4) views : 동적인 웹페이지를 담당하는 공간
+5) app.js : express의 핵심 컴트롤 타워(모든 기능 관리)
+
+[Express 설치 프로세스]
+1) 사용할 폴더 생성
+2) npm init -y (package 파일을 생성)
+3) express 설치 -> npm install express
+4) 기본 폴더 구성 -> config, public
