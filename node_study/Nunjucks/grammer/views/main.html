@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!--
+        1. 백엔드에서 넘어온 값을 HTML안에 표시
+        {{변수}} -> 넘어온 변수를 사용하겠다
+        백엔드에서 render를 실행할 때, 값을 넘겨줌
+    -->
+    <h1>메인페이지에 오신걸 환영합니다</h1>
+    <h2>{{name}}님 환영합니다</h2>
+    <!-- html안에서 직접 변수 생성 -->
+    {% set age = 20%}
+    <p>{{age}}살 입니다</p>
+    <!-- 
+        조건문(파이썬)
+        if -> if
+        else if -> elif
+        else -> else
+        endif => 조건문 종료
+      -->
+    {% set time = "오전" %} {% if time == "오전" %}
+    <p>오전은 node수업 입니다</p>
+    {% elif time == "오후" %}
+    <p>오후는 OpenCV수업 입니다</p>
+    {% else %}
+    <p>집에가자</p>
+    {% endif %}
+    <!-- 
+        반복문
+        for -> for
+        endfor -> 반복문 종료
+      -->
+    <table border="1px solid black">
+      <tr>
+        <!-- 반복문을 통해 td태그 생성 -->
+        {% set arr = [1,2,3,4,5] %} {% for i in arr %}
+        <td>{{i}}</td>
+        {% endfor %}
+      </tr>
+    </table>
+  </body>
+</html>
