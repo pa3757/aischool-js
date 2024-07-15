@@ -1,14 +1,15 @@
 const express = require("express");
 const app = express();
 const nunjucks = require("nunjucks");
-const bp = require("body-parser");
 const mainRouter = require("./routes/mainRouter");
-const userRouter = require("./routes/userRouter");
+const cookieRouter = require("./routes/cookie");
 
-app.use(bp.urlencoded({ extended: true }));
+// 쿠키 세팅
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 
 app.use("/", mainRouter);
-app.use("/user", userRouter);
+app.use("/cookie", cookieRouter);
 
 app.set("view engine", "html");
 nunjucks.configure("views", {
