@@ -24,6 +24,7 @@ router.get("/clearSession", (req, res) => {
   // req.session.name = null;
   // 모든 세션 삭제
   req.session.destroy();
+  // 테스트
 });
 
 module.exports = router;
