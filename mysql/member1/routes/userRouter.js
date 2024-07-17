@@ -30,8 +30,11 @@ router.post("/login", (req, res) => {
   conn.query(sql, [id, pw], (err, rows) => {
     // console.log(rows);
     if (rows.length > 0) {
-      res.redirect("/");
       console.log("로그인성공");
+      // 사용자의 닉네임 정보를 세션에 저장
+      // 사용자의 데이터는 DB에서 조회했기 때문에, rows[0]에 담겨있음
+      req.session.nick = rows[0].nick;
+      res.redirect("/");
     } else {
       console.log("로그인실패");
     }
@@ -63,6 +66,11 @@ router.post("/delete", (req, res) => {
       res.redirect("/");
     } else console.log("회원삭제 실패");
   });
+});
+// 로그아웃
+router.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
 });
 
 module.exports = router;

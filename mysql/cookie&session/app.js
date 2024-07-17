@@ -18,7 +18,7 @@ app.use(
     resave: false, // 세션을 항상 재 저장하겠다!
     secret: "secret", // 암호화할때 사용하는 키값
     store: new FileStore(), // 세션 저장소
-    saveUninitialized: true, // 세션이 저장되기 전에 uninitialized 상태로 만들어 저장
+    saveUninitialized: false, // 세션이 저장되기 전에 uninitialized 상태로 만들어 저장
   })
 );
 app.use("/cookie", cookieRouter);

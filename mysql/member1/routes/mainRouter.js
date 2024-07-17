@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("index");
+  // 세션 값을 꺼내오기
+  if (req.session.nick) res.render("index", { nick: req.session.nick });
+  else res.render("index");
 });
 router.get("/join", (req, res) => {
   res.render("join");
