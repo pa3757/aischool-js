@@ -6,9 +6,9 @@ router.get("/", (req, res) => {
   if (req.session.nick) res.render("index", { nick: req.session.nick });
   else res.render("index");
 });
-router.get("/join", (req, res) => {
-  res.render("join");
-});
+// router.get("/join", (req, res) => {
+//   res.render("join");
+// });
 // 사용자가 로그인을 요청했을 때!
 router.get("/login", (req, res) => {
   res.render("login");
