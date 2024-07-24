@@ -8,7 +8,7 @@ const userRouter = require("./routes/userRouter");
 const session = require("express-session");
 const FileStore = require("session-file-store")(session);
 
-app.use(bp.urlencoded({ extended: true }));
+app.use(bp.json());
 // 세션 설정
 app.use(
   session({

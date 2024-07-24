@@ -15,10 +15,14 @@ router.post("/join", (req, res) => {
   conn.query(sql, [id, pw, nick], (err, rows) => {
     // console.log(rows);
     if (rows) {
-      res.redirect("/");
+      // res.redirect("/");
+      console.log(rows);
+      console.log("가입성공");
+      // postman에서 확인하기
+      res.json({ result: "가입성공" });
     } else {
       // 가입에 실패했을 때,
-      res.send(`<script>alert("가입실패")</script>`);
+      // res.send(`<script>alert("가입실패")</script>`);
     }
   });
 });
