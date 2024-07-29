@@ -4,7 +4,8 @@ const bp = require("body-parser");
 
 router.use(bp.urlencoded({ extended: true }));
 
-router.get("/", (req, res) => {
+router.get("/", (req, res) => {.
+  
   res.render("index");
 });
 router.post("/login", (req, res) => {
